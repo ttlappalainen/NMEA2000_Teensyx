@@ -1,0 +1,29 @@
+{
+  "name": "NMEA2000-Teensyx",
+  "keywords": "nmea 2000, nmea, 2000, communication, bus, boat, marine",
+  "description": "Teensy 3.1/3.2/3.5/3.6/4.0/4.1 boards CAN driver library for the NMEA2000 library",
+  "repository":
+  {
+    "type": "git",
+    "url": "https://github.com/ttlappalainen/NMEA2000_Teensyx.git"
+  },
+  "authors":
+  {
+    "name": "Timo Lappalainen",
+    "url": "http://www.kave.fi",
+    "maintainer": true
+  },
+  "version": "1.0.0",
+  "license": "MIT",
+  "frameworks": "*",
+  "platforms": "Teensy",
+  "dependencies":
+  [
+      {
+          "name": "NMEA2000-library",
+          "authors": "Timo Lappalainen",
+          "url": "Kave Oy <www.kave.fi>",
+          "maintainer": true
+      }
+   ]
+}

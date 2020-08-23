@@ -1,4 +1,4 @@
-# NMEA2000_teensy
+# NMEA2000_Teensyx
 
 This library provides a Teensy CAN driver for the NMEA2000 library.
 

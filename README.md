@@ -1,6 +1,10 @@
 # NMEA2000_Teensyx
 
-This library provides a Teensy CAN driver for the NMEA2000 library.
+This library provides a Teensy 3.1/3.2/3.5/3.6/4.0/4.1 CAN driver for the NMEA2000 library.
+
+Library is under tests. I prefer to start to use it also for Teensy 3.1/3.2/3.5/3.6 for
+non critical devices in testing purposes so that possible errors will be catched. Final
+goal is to use this as default library for all Teensy boards.
 
 See https://github.com/ttlappalainen/NMEA2000.
 
@@ -15,15 +19,20 @@ See https://github.com/ttlappalainen/NMEA2000.
     tNMEA2000_Teensyx NMEA2000;
 
     void setup() {
-      NMEA2000.open();
+      NMEA2000.Open();
     }
 
     void loop() {
 	  NMEA2000.ParseMessages();
     }
 
-See the [NMEA2000](https://github.com/ttlappalainen/NMEA2000) for more examples. They are all compatible with this library.
+See the [NMEA2000/Examples](https://github.com/ttlappalainen/NMEA2000/tree/master/Examples) for more examples. They are all compatible with this library.
 
+## Changes
+
+    23.08.2020
+	
+	- Initial commit
 
 ## License
 

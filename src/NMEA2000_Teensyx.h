@@ -1,7 +1,7 @@
 /*
   NMEA2000_Teensyx.h
 
-  Copyright (c) 2020 Timo Lappalainen - https://github.com/ttlappalainen
+  Copyright (c) 2020-2022 Timo Lappalainen - https://github.com/ttlappalainen
 
   tNMEA2000_Teensyx library for Teensy 3.x and Teensy 4.x. 
   This will replace old NMEA2000_teensy library in future.
@@ -14,6 +14,14 @@
   required extensions. In this way it is much simple to keep library working.
 
   Thanks for FlexCAN4 library writers for original code.
+  
+  On constructor you can set bus, tx and rx pins. You can also use defined before constructor:
+  #define NMEA2000_TEENSYX_CAN_BUS tNMEA2000_Teensyx::CAN2 // select CAN bus 2
+  #define NMEA2000_TEENSYX_TX_PIN tNMEA2000_Teensyx::pinAlternate // Use alternate tx pin
+  #define NMEA2000_TEENSYX_RX_PIN tNMEA2000_Teensyx::pinAlternate // Use alternate rx pin
+  
+  Note that bus numbering differs on between Teensy 4.x and Teensy 3.x.
+  
 
   MIT License
 
@@ -52,6 +60,14 @@
   #endif
 #endif
 
+#ifndef NMEA2000_TEENSYX_TX_PIN
+  #define NMEA2000_TEENSYX_TX_PIN tNMEA2000_Teensyx::pinDefault
+#endif
+
+#ifndef NMEA2000_TEENSYX_RX_PIN
+  #define NMEA2000_TEENSYX_RX_PIN tNMEA2000_Teensyx::pinDefault
+#endif
+
 // -----------------------------------------------------------------------------
 class tNMEA2000_Teensyx : public tNMEA2000 {
 protected:
@@ -61,7 +77,7 @@ protected:
   void InitCANFrameBuffers();
 
 public:
-  enum tPins { pinAlternate, pinDefault };
+  enum tPins { pinAlternate=0, pinDefault=1 };
   enum tCANDevice {
   #if defined(__IMXRT1062__)
     CAN1 = (uint32_t)0x401D0000,
@@ -75,7 +91,7 @@ public:
   };
 
 public:
-  tNMEA2000_Teensyx(tCANDevice _bus=CAN1);
+  tNMEA2000_Teensyx(tCANDevice _bus=NMEA2000_TEENSYX_CAN_BUS, tPins _txPin=NMEA2000_TEENSYX_TX_PIN, tPins _rxPin=NMEA2000_TEENSYX_RX_PIN);
 
 protected:
   struct CAN_message_t {
@@ -99,7 +115,9 @@ protected:
   tPriorityRingBuffer<CAN_message_t>  *rxRing;
   tPriorityRingBuffer<CAN_message_t>  *txRing;
   uint8_t firstTxBox;
-
+  tPins txPin:1;
+  tPins rxPin:1;
+  
 protected:    
   enum FLEXCAN_RXTX {
     TX,

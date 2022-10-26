@@ -1,7 +1,7 @@
 /*
   NMEA2000_Teensyx.cpp
 
-  Copyright (c) 2020 Timo Lappalainen - https://github.com/ttlappalainen
+  Copyright (c) 2020-2022 Timo Lappalainen - https://github.com/ttlappalainen
 
   tNMEA2000_Teensyx library for Teensy 3.x and Teensy 4.x. 
   This will replace old NMEA2000_teensy library in future.
@@ -75,7 +75,8 @@ static tNMEA2000_Teensyx* _CAN1 = 0;
 #define INVALID_MAILBOX 0xff
 
 // *****************************************************************************
-tNMEA2000_Teensyx::tNMEA2000_Teensyx(tCANDevice _bus) : bus(_bus), rxRing(0), txRing(0), firstTxBox(INVALID_MAILBOX) {
+tNMEA2000_Teensyx::tNMEA2000_Teensyx(tCANDevice _bus, tPins _txPin, tPins _rxPin) : 
+    bus(_bus), rxRing(0), txRing(0), firstTxBox(INVALID_MAILBOX), txPin(_txPin), rxPin(_rxPin)  {
 #if defined(__IMXRT1062__)
   if ( bus == CAN3 ) _CAN3 = this;
   if ( bus == CAN2 ) _CAN2 = this;
@@ -91,7 +92,8 @@ tNMEA2000_Teensyx::tNMEA2000_Teensyx(tCANDevice _bus) : bus(_bus), rxRing(0), tx
 
 // *****************************************************************************
 bool tNMEA2000_Teensyx::CANOpen() {
-  setTX(tNMEA2000_Teensyx::pinDefault);
+  delay(2000);
+  setTX(txPin);
   begin();
   setBaudRate(250000);
 
@@ -300,7 +302,7 @@ void tNMEA2000_Teensyx::begin() {
   FLEXCANb_CTRL1(bus) &= ~FLEXCAN_CTRL_CLK_SRC;
 #endif
 
-  setTX(); setRX();
+  setTX(txPin); setRX(rxPin);
 
   FLEXCANb_MCR(bus) &= ~FLEXCAN_MCR_MDIS; /* enable module */
   EnterFreezeMode();

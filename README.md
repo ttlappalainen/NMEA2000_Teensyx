@@ -29,6 +29,9 @@ See https://github.com/ttlappalainen/NMEA2000.
 See the [NMEA2000/Examples](https://github.com/ttlappalainen/NMEA2000/tree/master/Examples) for more examples. They are all compatible with this library.
 
 ## Changes
+    26.10.2022
+    
+    - Added possibility to select CAN alternative pins
 
     23.08.2020
 	

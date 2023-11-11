@@ -1,7 +1,7 @@
 /*
   NMEA2000_Teensyx.h
 
-  Copyright (c) 2020-2022 Timo Lappalainen - https://github.com/ttlappalainen
+  Copyright (c) 2020-2023 Timo Lappalainen - https://github.com/ttlappalainen
 
   tNMEA2000_Teensyx library for Teensy 3.x and Teensy 4.x. 
   This will replace old NMEA2000_teensy library in future.

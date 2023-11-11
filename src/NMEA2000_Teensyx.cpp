@@ -1,7 +1,7 @@
 /*
   NMEA2000_Teensyx.cpp
 
-  Copyright (c) 2020-2022 Timo Lappalainen - https://github.com/ttlappalainen
+  Copyright (c) 2020-2023 Timo Lappalainen - https://github.com/ttlappalainen
 
   tNMEA2000_Teensyx library for Teensy 3.x and Teensy 4.x. 
   This will replace old NMEA2000_teensy library in future.
@@ -213,8 +213,8 @@ void tNMEA2000_Teensyx::InitCANFrameBuffers() {
     txRing=0;
   }
 
-  if ( rxRing==0 ) rxRing=new tPriorityRingBuffer<CAN_message_t>(MaxCANReceiveFrames,7);
-  if ( txRing==0 ) txRing=new tPriorityRingBuffer<CAN_message_t>(MaxCANSendFrames,7);
+  if ( rxRing==0 ) rxRing=new tPriorityRingBuffer<CAN_message_t>(MaxCANReceiveFrames,8);
+  if ( txRing==0 ) txRing=new tPriorityRingBuffer<CAN_message_t>(MaxCANSendFrames,8);
 }
 
 #if defined(__IMXRT1062__)
@@ -428,9 +428,9 @@ void tNMEA2000_Teensyx::writeIFLAG(uint64_t value) {
 // *****************************************************************************
 void tNMEA2000_Teensyx::writeIFLAGBit(uint8_t mb_num) {
   if ( mb_num < 32 ) {
-    FLEXCANb_IFLAG1(bus) |= (1UL << mb_num);
+    FLEXCANb_IFLAG1(bus) = (1UL << mb_num);
   } else {
-    FLEXCANb_IFLAG2(bus) |= (1UL << (mb_num - 32));
+    FLEXCANb_IFLAG2(bus) = (1UL << (mb_num - 32));
   }
 }
 

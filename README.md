@@ -29,6 +29,13 @@ See https://github.com/ttlappalainen/NMEA2000.
 See the [NMEA2000/Examples](https://github.com/ttlappalainen/NMEA2000/tree/master/Examples) for more examples. They are all compatible with this library.
 
 ## Changes
+    11.11.2023
+    
+    - Changed on line 216 priority ring size to 8. Priorities are on range 0-7.
+    
+    - Fixed on line 431 and 433 IFLAG reset to = instead of |=. With |= reset could cause
+      resetting of other mb interrupt.
+
     26.10.2022
     
     - Added possibility to select CAN alternative pins
@@ -41,7 +48,7 @@ See the [NMEA2000/Examples](https://github.com/ttlappalainen/NMEA2000/tree/maste
 
     The MIT License
 
-    Copyright (c) 2020 Timo Lappalainen
+    Copyright (c) 2020-2023 Timo Lappalainen
 
     Permission is hereby granted, free of charge, to any person obtaining a copy
     of this software and associated documentation files (the "Software"), to deal
